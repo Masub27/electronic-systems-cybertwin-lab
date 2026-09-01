@@ -50,6 +50,7 @@
           <button class="supply-line" data-line="ac12"><span>LINE B</span><strong>12 V AC</strong><small>Transformer • 50 Hz • 0.25 A</small><i>L~</i><i>N~</i></button>
           <button class="supply-line" data-line="pwm5"><span>LINE C</span><strong>5 V PWM</strong><small>Controller • 1 kHz • 60%</small><i>SIG</i><i>GND</i></button>
           <button class="supply-line" data-line="sensor10"><span>LINE D</span><strong>0–10 V</strong><small>Analogue sensor • 7.2 V</small><i>OUT</i><i>GND</i></button>
+          <button class="supply-line" data-line="acCurrent"><span>LINE E</span><strong>AC CURRENT</strong><small>6 V AC loop • 1.50 A • 50 Hz</small><i>L~</i><i>N~</i></button>
         </div>
         <div class="line-note"><span id="selectedLine">Selected: LINE A — 24 V DC traffic controller</span><span>All sources are simulated SELV training circuits.</span></div>
         <div class="bench">
@@ -60,7 +61,7 @@
             <div class="ports"><button class="port active" data-port="com">COM</button><button class="port active" data-port="v">VΩ</button><button class="port" data-port="a">10A</button></div>
           </div>
         </div>
-        <div id="scopePanel" class="scope-panel hidden"><div class="scope-head"><strong>OSCILLOSCOPE</strong><span id="scopeReadout">CH1 — waiting for connection</span></div><canvas id="scopeCanvas" width="760" height="220" aria-label="oscilloscope waveform"></canvas></div>
+        <div id="scopePanel" class="scope-panel hidden"><div class="scope-head"><strong>DIGITAL OSCILLOSCOPE</strong><span id="scopeReadout">CH1 — waiting for connection</span></div><canvas id="scopeCanvas" width="760" height="220" aria-label="oscilloscope waveform"></canvas><div class="scope-values"><span>Frequency <strong id="scopeFrequency">—</strong></span><span>Voltage <strong id="scopeVoltage">—</strong></span><span>Duty cycle <strong id="scopeDuty">—</strong></span><span>Time/div <strong id="scopeTimebase">—</strong></span><span>Volts/div <strong id="scopeScale">—</strong></span></div></div>
         <div class="controls three">
           <label>Instrument<select id="instrument"><option value="voltmeter">Voltmeter</option><option value="ammeter">Ammeter</option><option value="multimeter">Digital multimeter</option><option value="clamp">Clamp meter</option><option value="oscilloscope">Oscilloscope</option></select></label>
           <label>Function<select id="functionSelect"><option value="vdc">DC voltage</option><option value="vac">AC voltage</option><option value="adc">DC current</option><option value="aac">AC current</option><option value="resistance">Resistance</option><option value="continuity">Continuity</option><option value="waveform">Waveform / frequency</option></select></label>
