@@ -12,6 +12,8 @@ A browser-based Industry 5.0 learning prototype for electrical measurement, traf
 - Three sequential workplace agents
 - Learner diagnosis, immediate action and justification
 - CyberTwin identity/event record and JSON evidence export
+- Live Magdeburg temperature, precipitation, visibility, wind and daylight context
+- Weather-derived traffic-risk advice with 15-minute refresh and cached fallback
 - Responsive, API-free and GitHub Pages compatible
 
 ## Run locally
@@ -25,3 +27,5 @@ Open `http://localhost:8000`.
 ## Safety
 
 This is an educational simulation. A future physical prototype should start with protected 5–24 V DC equipment. It must not directly control a public traffic intersection or exposed mains-voltage equipment.
+
+Public weather is genuine regional data from Open-Meteo. Voltmeter, ammeter and traffic-controller values remain virtual until physical sensors are connected.

@@ -6,6 +6,7 @@
   <meta name="description" content="TVET Electronic Systems CyberTwin Laboratory">
   <title>Electronic Systems CyberTwin Lab</title>
   <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="css/live-data.css?v=2">
 </head>
 <body>
   <header class="hero">
@@ -24,6 +25,20 @@
         <option value="lamp">Red lamp open circuit</option><option value="conflict">Conflicting green signals</option><option value="sensor">Vehicle sensor failure</option><option value="button">Pedestrian button failure</option><option value="timing">Controller timing fault</option><option value="cable">Signal cable disconnection</option><option value="short">Output short circuit</option><option value="cyber">Unauthorised phase command</option><option value="drop">Supply voltage drop</option>
       </select>
       <button id="injectFault">Inject Selected Fault</button><button id="normalMode" class="secondary">Restore Normal</button>
+    </section>
+
+    <section class="panel live-panel">
+      <div class="live-heading"><div><p class="kicker">00 — LIVE MAGDEBURG CONTEXT</p><h2>Traffic Environment Data</h2></div><div><span id="liveStatus" class="live-status connecting">CONNECTING</span><button id="refreshLive" class="secondary">Refresh live data</button></div></div>
+      <div class="live-grid">
+        <article><small>Air temperature</small><strong id="liveTemperature">—</strong><span>LIVE EXTERNAL DATA</span></article>
+        <article><small>Precipitation</small><strong id="liveRain">—</strong><span>LIVE EXTERNAL DATA</span></article>
+        <article><small>Visibility</small><strong id="liveVisibility">—</strong><span>LIVE EXTERNAL DATA</span></article>
+        <article><small>Wind speed</small><strong id="liveWind">—</strong><span>LIVE EXTERNAL DATA</span></article>
+        <article><small>Daylight state</small><strong id="liveDaylight">—</strong><span>LIVE EXTERNAL DATA</span></article>
+        <article><small>Traffic risk</small><strong id="trafficRisk">—</strong><span>DIGITAL-TWIN DERIVED</span></article>
+      </div>
+      <div class="live-meta"><span>Source: Open-Meteo, Magdeburg coordinates</span><span id="liveMeasured">Measurement: —</span><span id="liveNext">Next refresh: —</span></div>
+      <div id="weatherAdvisory" class="feedback neutral">Live environmental evidence will provide traffic-system context. It does not replace physical electrical measurements.</div>
     </section>
 
     <section class="grid two">
@@ -54,6 +69,7 @@
           <div class="traffic east" data-head="east"><i class="red on"></i><i class="yellow"></i><i class="green"></i></div>
           <div class="traffic south" data-head="south"><i class="red on"></i><i class="yellow"></i><i class="green"></i></div>
           <div class="traffic west" data-head="west"><i class="red on"></i><i class="yellow"></i><i class="green"></i></div>
+          <div id="rainLayer" class="rain-layer"></div><div id="visibilityLayer" class="visibility-layer"></div>
           <div class="car car1">▰</div><div class="car car2">▰</div><div class="pedestrian">●</div>
           <button id="pedButton" class="ped-button">PED</button><span id="sensorLoop" class="sensor-loop">S1</span>
           <div id="safeOverlay" class="safe-overlay">ALL RED — SAFE STATE</div>
@@ -88,5 +104,6 @@
   </main>
   <footer>Educational prototype • Extra-low-voltage simulation • Human authority remains final</footer>
   <script src="js/app.js?v=1"></script>
+  <script src="js/live-data.js?v=2"></script>
 </body>
 </html>
