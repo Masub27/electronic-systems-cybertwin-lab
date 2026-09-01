@@ -7,6 +7,7 @@
   <title>Electronic Systems CyberTwin Lab</title>
   <link rel="stylesheet" href="css/style.css?v=1">
   <link rel="stylesheet" href="css/live-data.css?v=2">
+  <link rel="stylesheet" href="css/measurement-board.css?v=3">
 </head>
 <body>
   <header class="hero">
@@ -44,6 +45,13 @@
     <section class="grid two">
       <article class="panel">
         <p class="kicker">01 — VIRTUAL MEASUREMENT BENCH</p><h2>Instrument and Probe Test</h2>
+        <div class="supply-board" aria-label="separate laboratory supply lines">
+          <button class="supply-line active" data-line="dc24"><span>LINE A</span><strong>24 V DC</strong><small>Traffic controller • 0.50 A</small><i>+24V</i><i>0V</i></button>
+          <button class="supply-line" data-line="ac12"><span>LINE B</span><strong>12 V AC</strong><small>Transformer • 50 Hz • 0.25 A</small><i>L~</i><i>N~</i></button>
+          <button class="supply-line" data-line="pwm5"><span>LINE C</span><strong>5 V PWM</strong><small>Controller • 1 kHz • 60%</small><i>SIG</i><i>GND</i></button>
+          <button class="supply-line" data-line="sensor10"><span>LINE D</span><strong>0–10 V</strong><small>Analogue sensor • 7.2 V</small><i>OUT</i><i>GND</i></button>
+        </div>
+        <div class="line-note"><span id="selectedLine">Selected: LINE A — 24 V DC traffic controller</span><span>All sources are simulated SELV training circuits.</span></div>
         <div class="bench">
           <div class="supply"><span>BENCH SUPPLY</span><strong id="supplyDisplay">24.0 V DC</strong><small>Current limit: 2.0 A</small></div>
           <div class="circuit" aria-label="test circuit"><span class="wire"></span><span class="resistor">LOAD<br>48 Ω</span><span class="wire"></span><span id="testPointA" class="point">TP+</span><span id="testPointB" class="point negative">TP−</span></div>
@@ -52,12 +60,14 @@
             <div class="ports"><button class="port active" data-port="com">COM</button><button class="port active" data-port="v">VΩ</button><button class="port" data-port="a">10A</button></div>
           </div>
         </div>
+        <div id="scopePanel" class="scope-panel hidden"><div class="scope-head"><strong>OSCILLOSCOPE</strong><span id="scopeReadout">CH1 — waiting for connection</span></div><canvas id="scopeCanvas" width="760" height="220" aria-label="oscilloscope waveform"></canvas></div>
         <div class="controls three">
-          <label>Instrument<select id="instrument"><option value="voltmeter">Voltmeter</option><option value="ammeter">Ammeter</option><option value="multimeter">Digital multimeter</option><option value="clamp">Clamp meter</option></select></label>
-          <label>Function<select id="functionSelect"><option value="vdc">DC voltage</option><option value="adc">DC current</option><option value="resistance">Resistance</option><option value="continuity">Continuity</option></select></label>
+          <label>Instrument<select id="instrument"><option value="voltmeter">Voltmeter</option><option value="ammeter">Ammeter</option><option value="multimeter">Digital multimeter</option><option value="clamp">Clamp meter</option><option value="oscilloscope">Oscilloscope</option></select></label>
+          <label>Function<select id="functionSelect"><option value="vdc">DC voltage</option><option value="vac">AC voltage</option><option value="adc">DC current</option><option value="aac">AC current</option><option value="resistance">Resistance</option><option value="continuity">Continuity</option><option value="waveform">Waveform / frequency</option></select></label>
           <label>Range<select id="rangeSelect"><option value="auto">Auto range</option><option value="2">2 V / 2 A</option><option value="20">20 V</option><option value="200">200 V / 200 Ω</option></select></label>
         </div>
-        <div class="controls two"><label>Connection<select id="connection"><option value="parallel">Parallel across load</option><option value="series">Series with load</option><option value="open">Probes disconnected</option><option value="wrong">Wrong probe port</option></select></label><button id="takeMeasurement">Take Measurement</button></div>
+        <div class="controls three"><label>Connection<select id="connection"><option value="parallel">Across line — parallel</option><option value="series">Break line — series</option><option value="clamp">Clamp around one conductor</option><option value="open">Probes disconnected</option><option value="wrong">Wrong probe port</option></select></label><label>Red probe / CH1<select id="redProbe"><option value="high">Line high / signal</option><option value="return">Line return / ground</option><option value="none">Not connected</option></select></label><label>Black probe / ground<select id="blackProbe"><option value="return">Line return / ground</option><option value="high">Line high / signal</option><option value="none">Not connected</option></select></label></div>
+        <button id="takeMeasurement">Connect and Measure</button>
         <div id="measurementFeedback" class="feedback neutral">Choose the correct instrument, function, range and connection.</div>
       </article>
 
@@ -104,6 +114,7 @@
   </main>
   <footer>Educational prototype • Extra-low-voltage simulation • Human authority remains final</footer>
   <script src="js/app.js?v=1"></script>
+  <script src="js/measurement-lines.js?v=3"></script>
   <script src="js/live-data.js?v=2"></script>
 </body>
 </html>

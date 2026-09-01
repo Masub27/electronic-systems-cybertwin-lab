@@ -5,6 +5,8 @@ A browser-based Industry 5.0 learning prototype for electrical measurement, traf
 ## Features
 
 - Virtual voltmeter, ammeter, multimeter and clamp-meter selection
+- Four separately selectable SELV supply lines: 24 V DC, 12 V AC, 5 V PWM and 0–10 V analogue
+- Interactive oscilloscope with DC, sine-wave, PWM and analogue waveforms
 - Function, range, probe-port and series/parallel connection decisions
 - Animated four-way traffic intersection
 - Nine instructor-selectable or randomly hidden faults
