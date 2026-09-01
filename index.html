@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="TVET Electronic Systems CyberTwin Laboratory">
+  <title>Electronic Systems CyberTwin Lab</title>
+  <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+  <header class="hero">
+    <div><p class="eyebrow">TVET LIVING LABS 6.0 FOR INDUSTRY 5.0</p><h1>Electronic Systems CyberTwin Laboratory</h1><p>Measurement • Traffic Control • Functional Safety • Human-led diagnosis</p></div>
+    <div class="header-actions"><button id="newMission">New Mystery Mission</button><button id="exportJson" class="secondary">Export JSON</button></div>
+  </header>
+
+  <main>
+    <section class="statusbar" aria-label="mission status">
+      <span id="missionCode">Mission EL-101</span><span id="modeBadge">MYSTERY MODE</span><span id="timer">00:00</span><span id="scoreBadge">Score: —</span>
+    </section>
+
+    <section class="panel instructor">
+      <div><p class="kicker">INSTRUCTOR CONTROL</p><h2>Fault Injection</h2></div>
+      <select id="faultSelect" aria-label="Choose fault">
+        <option value="lamp">Red lamp open circuit</option><option value="conflict">Conflicting green signals</option><option value="sensor">Vehicle sensor failure</option><option value="button">Pedestrian button failure</option><option value="timing">Controller timing fault</option><option value="cable">Signal cable disconnection</option><option value="short">Output short circuit</option><option value="cyber">Unauthorised phase command</option><option value="drop">Supply voltage drop</option>
+      </select>
+      <button id="injectFault">Inject Selected Fault</button><button id="normalMode" class="secondary">Restore Normal</button>
+    </section>
+
+    <section class="grid two">
+      <article class="panel">
+        <p class="kicker">01 — VIRTUAL MEASUREMENT BENCH</p><h2>Instrument and Probe Test</h2>
+        <div class="bench">
+          <div class="supply"><span>BENCH SUPPLY</span><strong id="supplyDisplay">24.0 V DC</strong><small>Current limit: 2.0 A</small></div>
+          <div class="circuit" aria-label="test circuit"><span class="wire"></span><span class="resistor">LOAD<br>48 Ω</span><span class="wire"></span><span id="testPointA" class="point">TP+</span><span id="testPointB" class="point negative">TP−</span></div>
+          <div class="meter">
+            <span id="meterName">DIGITAL MULTIMETER</span><strong id="meterDisplay">0.00</strong>
+            <div class="ports"><button class="port active" data-port="com">COM</button><button class="port active" data-port="v">VΩ</button><button class="port" data-port="a">10A</button></div>
+          </div>
+        </div>
+        <div class="controls three">
+          <label>Instrument<select id="instrument"><option value="voltmeter">Voltmeter</option><option value="ammeter">Ammeter</option><option value="multimeter">Digital multimeter</option><option value="clamp">Clamp meter</option></select></label>
+          <label>Function<select id="functionSelect"><option value="vdc">DC voltage</option><option value="adc">DC current</option><option value="resistance">Resistance</option><option value="continuity">Continuity</option></select></label>
+          <label>Range<select id="rangeSelect"><option value="auto">Auto range</option><option value="2">2 V / 2 A</option><option value="20">20 V</option><option value="200">200 V / 200 Ω</option></select></label>
+        </div>
+        <div class="controls two"><label>Connection<select id="connection"><option value="parallel">Parallel across load</option><option value="series">Series with load</option><option value="open">Probes disconnected</option><option value="wrong">Wrong probe port</option></select></label><button id="takeMeasurement">Take Measurement</button></div>
+        <div id="measurementFeedback" class="feedback neutral">Choose the correct instrument, function, range and connection.</div>
+      </article>
+
+      <article class="panel">
+        <p class="kicker">02 — INTERACTIVE TRAFFIC SYSTEM</p><h2>Four-Way Intersection</h2>
+        <div id="intersection" class="intersection">
+          <div class="road vertical"></div><div class="road horizontal"></div>
+          <div class="traffic north" data-head="north"><i class="red on"></i><i class="yellow"></i><i class="green"></i></div>
+          <div class="traffic east" data-head="east"><i class="red on"></i><i class="yellow"></i><i class="green"></i></div>
+          <div class="traffic south" data-head="south"><i class="red on"></i><i class="yellow"></i><i class="green"></i></div>
+          <div class="traffic west" data-head="west"><i class="red on"></i><i class="yellow"></i><i class="green"></i></div>
+          <div class="car car1">▰</div><div class="car car2">▰</div><div class="pedestrian">●</div>
+          <button id="pedButton" class="ped-button">PED</button><span id="sensorLoop" class="sensor-loop">S1</span>
+          <div id="safeOverlay" class="safe-overlay">ALL RED — SAFE STATE</div>
+        </div>
+        <div class="controls three"><button id="startTraffic">Run Sequence</button><button id="requestCrossing" class="secondary">Pedestrian Request</button><button id="safeState" class="danger">Force All-Red</button></div>
+        <div class="telemetry"><span>Supply <strong id="trafficVoltage">24.0 V</strong></span><span>Phase <strong id="phase">ALL RED</strong></span><span>Vehicle sensor <strong id="vehicleSensor">CLEAR</strong></span><span>Controller <strong id="controllerTrust">TRUSTED</strong></span></div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <p class="kicker">03 — CYBERTWIN EVIDENCE</p><h2>Asset Identity and Test Record</h2>
+      <div class="identity-grid"><div><small>Selected CyberTwin</small><strong id="assetId">CT-TLC-001</strong></div><div><small>Edge node</small><strong>EDGE-LAB-01</strong></div><div><small>Certificate</small><strong id="certificate">VALID</strong></div><div><small>Evidence packets</small><strong id="packetCount">0</strong></div></div>
+      <div id="eventLog" class="log" aria-live="polite"></div>
+    </section>
+
+    <section class="panel">
+      <p class="kicker">04 — SEQUENTIAL WORKPLACE CONSULTATION</p><h2>Consult the Agents Separately</h2>
+      <div class="agent-grid">
+        <article><h3>Electrical Technician</h3><p>Measurement, wiring and component diagnosis</p><button data-agent="electrical">Consult Agent</button><div id="electricalReply" class="reply hidden"></div></article>
+        <article><h3>Functional Safety Officer</h3><p>Isolation, safe state and restart approval</p><button data-agent="safety">Consult Agent</button><div id="safetyReply" class="reply hidden"></div></article>
+        <article><h3>Automation & Cybersecurity</h3><p>Controller logic, identities and commands</p><button data-agent="cyber">Consult Agent</button><div id="cyberReply" class="reply hidden"></div></article>
+      </div>
+      <div id="coordinated" class="feedback neutral">The coordinated recommendation unlocks after all three consultations.</div>
+    </section>
+
+    <section class="panel">
+      <p class="kicker">05 — HUMAN-LED DECISION</p><h2>Diagnose, Act and Justify</h2>
+      <div class="controls two"><label>Diagnosis<select id="diagnosis"><option value="">Select diagnosis…</option><option value="lamp">Red lamp open circuit</option><option value="conflict">Conflicting green signals</option><option value="sensor">Vehicle sensor failure</option><option value="button">Pedestrian button failure</option><option value="timing">Controller timing fault</option><option value="cable">Signal cable disconnection</option><option value="short">Output short circuit</option><option value="cyber">Unauthorised phase command</option><option value="drop">Supply voltage drop</option></select></label><label>Immediate action<select id="action"><option value="">Select action…</option><option value="allred">Force all-red and secure junction</option><option value="continue">Continue and monitor</option><option value="reset">Reset controller immediately</option><option value="repair">Isolate circuit and perform electrical test</option></select></label></div>
+      <label>Evidence-based justification<textarea id="justification" rows="4" placeholder="Refer to measurements, signal state, safety and CyberTwin evidence…"></textarea></label>
+      <button id="submitDecision">Submit Human Decision</button><div id="result" class="feedback neutral">Complete the investigation before submission.</div>
+    </section>
+  </main>
+  <footer>Educational prototype • Extra-low-voltage simulation • Human authority remains final</footer>
+  <script src="js/app.js?v=1"></script>
+</body>
+</html>
